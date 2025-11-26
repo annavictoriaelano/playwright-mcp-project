@@ -7,6 +7,7 @@ export class LoginPage extends BasePage {
   private passwordInput = '#password';
   private loginButton = '#login-button';
   private errorMessage = '.error-message-container';
+  private errorCloseButton = '.error-button';
 
   constructor(page: Page) {
     super(page);
@@ -28,5 +29,9 @@ export class LoginPage extends BasePage {
 
   async isErrorMessageVisible(): Promise<boolean> {
     return await this.isVisible(this.errorMessage);
+  }
+
+  async dismissErrorMessage(): Promise<void> {
+    await this.click(this.errorCloseButton);
   }
 }
