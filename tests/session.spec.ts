@@ -4,7 +4,10 @@ import { ProductsPage } from '../pages/ProductsPage';
 
 test.describe('M01_TS03: Session Management Tests', () => {
   
-  test('M01_TS03_TC01: User remains logged in after browser refresh', async ({ page }) => {
+  test('M01_TS03_TC01: User remains logged in after browser refresh', async ({ page, browserName }) => {
+    // Skip on WebKit due to page.reload() crash in CI/CD
+    test.skip(browserName === 'webkit', 'WebKit has known issues with page.reload() on SauceDemo in CI/CD');
+    
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
 
